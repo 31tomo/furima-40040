@@ -25,7 +25,6 @@
 | item_name          | string     | null: false                    |
 | price              | integer    | null: false                    |
 | message            | text       | null: false                    |
-| seller             | string     | null: false                    |
 | category_id        | string     | null: false                    |
 | condition_id       | string     | null: false                    |
 | shipping_cost_id   | string     | null: false                    |
@@ -54,11 +53,8 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| card_number        | integer    | null: false                    |
-| exp_month_year     | integer    | null: false                    |
-| approval_code      | integer    | null: false                    |
 | postal_code        | integer    | null: false                    |
-| region             | string     | null: false                    |
+| prefecture_id      | string     | null: false                    |
 | city               | string     | null: false                    |
 | house_number       | string     | null: false                    |
 | building_name      | string     |                                |
