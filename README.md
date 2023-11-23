@@ -25,11 +25,11 @@
 | item_name          | string     | null: false                    |
 | price              | integer    | null: false                    |
 | message            | text       | null: false                    |
-| category_id        | string     | null: false                    |
-| condition_id       | string     | null: false                    |
-| shipping_cost_id   | string     | null: false                    |
-| shipping_region_id | string     | null: false                    |
-| shipping_date_id   | string     | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| shipping_cost_id   | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| shipping_date_id   | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
@@ -53,8 +53,8 @@
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| postal_code        | integer    | null: false                    |
-| prefecture_id      | string     | null: false                    |
+| postal_code        | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | string     | null: false                    |
 | house_number       | string     | null: false                    |
 | building_name      | string     |                                |
