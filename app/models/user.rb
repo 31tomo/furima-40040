@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   validate :password_complexity
   validates :last_name_kana, :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'は全角（カタカナ）で入力してください' }
+  validates :email, format: { with: /@/, message: 'は@を含まないと登録できません' }
 
   private
 
