@@ -5,19 +5,22 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :last_name, presence: true
-  validates :first_name, presence: true
   validates :birthday, presence: true
   validate :password_complexity
-  validates :last_name_kana, :first_name_kana, presence: true, format: { with: /\A[\p{katakana}\p{blank}ー－]+\z/, message: 'は全角（カタカナ）で入力してください' }
-  validates :email, format: { with: /@/, message: 'は@を含まないと登録できません' }
+
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } do
+    validates :first_name
+    validates :last_name
+    validates :last_name_kana
+    validates :first_name_kana
+  end
 
   private
 
   def password_complexity
     # パスワードが英字と数字の両方を含むことを確認
     unless password.match(/^(?=.*[a-zA-Z])(?=.*\d).+/)
-      errors.add :password, 'は英字と数字の両方を含めて設定してください'
+      errors.add :password, 'には英字と数字の両方を含めて設定してください'
     end
   end
 end
