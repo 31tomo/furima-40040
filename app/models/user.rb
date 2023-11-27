@@ -11,6 +11,8 @@ class User < ApplicationRecord
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } do
     validates :first_name
     validates :last_name
+  end
+  with_options presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: '全角文字を使用してください' } do
     validates :last_name_kana
     validates :first_name_kana
   end
@@ -19,7 +21,7 @@ class User < ApplicationRecord
 
   def password_complexity
     # パスワードが英字と数字の両方を含むことを確認
-    unless password.match(/^(?=.*[a-zA-Z])(?=.*\d).+/)
+    unless password.match(/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i)
       errors.add :password, 'には英字と数字の両方を含めて設定してください'
     end
   end
