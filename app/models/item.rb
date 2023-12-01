@@ -19,14 +19,5 @@ class Item < ApplicationRecord
   validates :shipping_date_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :price, presence: true,
                     numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  validate :validate_price_format
-
-  private
-
-  def validate_price_format
-    return if price.to_s =~ /\A\d+\z/
-
-    errors.add(:price, 'は半角数字で入力してください')
-  end
 
 end
