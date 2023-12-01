@@ -67,10 +67,10 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Price must be greater than or equal to 300"
       end
-      it '価格は9,999,999円以上では投稿できない' do
-        @item.price = '10,000,000'
+      it '価格は10,000,000円以上では投稿できない' do
+        @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price is not a number"
+        expect(@item.errors.full_messages).to include "Price must be less than or equal to 9999999"
       end
       it '価格は半角数字のみ保存可能である' do
         @item.price = '五百円'
