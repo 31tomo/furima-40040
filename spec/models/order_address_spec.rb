@@ -84,6 +84,11 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
+      it 'phoneが半角数値以外では保存できないこと' do
+        @order_address.phone = '山だa+'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone should be 10 to 11 digits')
+      end
     end
   end
 end
