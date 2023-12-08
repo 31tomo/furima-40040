@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :contributor_confirmation, only: [:edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update]
+  before_action :authenticate_user_for_edit, only: [:edit]
 
   def new
     @item = Item.new
@@ -52,5 +53,11 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def authenticate_user_for_edit
+    unless user_signed_in? && @item.order.blank?
+      redirect_to root_path
+    end
   end
 end
