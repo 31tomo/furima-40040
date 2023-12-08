@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
+  before_action :authenticate_user_for_edit, only: [:index, :create]
   
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -36,6 +37,12 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id]) if params[:item_id]
+  end
+
+  def authenticate_user_for_edit
+    unless user_signed_in? && @item.order.blank? && current_user != @item.user
+      redirect_to root_path
+    end
   end
 
 end
